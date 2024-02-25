@@ -1,6 +1,6 @@
 import sys
 
-def custom_encryption(input_text, shift_amount):
+def encrypt_text(input_text, shift_amount):
     result_text = ""
     for char in input_text:
         if char.isalpha():
@@ -16,19 +16,21 @@ def display_encrypted_blocks(text):
 
 def main():
     if len(sys.argv) != 2:
-        print("Usage: python3 custom_encryption.py <shift>")
+        print("Please give a secret number as a command line argument.")
         sys.exit(1)
 
     try:
-        shift = int(sys.argv[1])
-        shift = shift % 26
+        secret_number = int(sys.argv[1])
+        secret_number = secret_number % 26
     except ValueError:
-        print("Please provide a valid integer for the shift value.")
+        print("Please enter a valid whole number for the secret number.")
         sys.exit(1)
 
+    print("Enter a message to encrypt:")
     for line in sys.stdin:
         line = line.upper()
-        encrypted_message = custom_encryption(line, shift)
+        encrypted_message = encrypt_text(line, secret_number)
+        print("Encrypted message blocks:")
         display_encrypted_blocks(encrypted_message)
 
 if __name__ == "__main__":
